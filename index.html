@@ -643,7 +643,9 @@
       }));
     });
 
-    await cheerpjRunMain("main.MainClass", "/app/dungeon-chronicles.jar");
+    // Compute jar path relative to current document location (supports subfolder hosting like GitHub Pages)
+    const jarUrl = new URL("dungeon-chronicles.jar", document.baseURI).href;
+    await cheerpjRunMain("main.MainClass", jarUrl);
   } catch (e) {
     if (loadingElem) {
       loadingElem.innerHTML = `
