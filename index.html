@@ -643,9 +643,14 @@
       }));
     });
 
-    // Compute jar path relative to current document location (supports subfolder hosting like GitHub Pages)
-    const jarUrl = new URL("dungeon-chronicles.jar", document.baseURI).href;
-    await cheerpjRunMain("main.MainClass", jarUrl);
+    // Compute jar path in CheerpJ's virtual /app/ filesystem:
+    // CheerpJ maps /app/ to the web server domain root.
+    // In a repository subfolder (e.g. GitHub Pages https://user.github.io/repo/),
+    // the virtual path must be /app/repo/dungeon-chronicles.jar.
+    // Locally (http://localhost:8080/), pathname is "/" so it resolves to /app/dungeon-chronicles.jar.
+    const pathPrefix = window.location.pathname.replace(/\/([^\/]*)$/, '');
+    const jarAppPath = `/app${pathPrefix}/dungeon-chronicles.jar`;
+    await cheerpjRunMain("main.MainClass", jarAppPath);
   } catch (e) {
     if (loadingElem) {
       loadingElem.innerHTML = `
