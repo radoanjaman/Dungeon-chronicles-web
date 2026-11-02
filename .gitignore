@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# Test and agent scripts
+.agents/
+test/
+verify_all.js
+test_*.js
+inspect_*.js
+search_*.js
+find_*.js
+trace*.js
+run_diag.js
+sim_user.js
+javap_*.txt
+verify_resolutions.js
+compile.js
+repackage.js
+sources.txt
+*.png
+skills-lock.json
+TEST_*.md
+PROJECT.md
+
+# Backups
+*_backup/
+*_backup2/
